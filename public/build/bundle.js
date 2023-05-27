@@ -382,6 +382,13 @@ var app = (function () {
         else
             dispatch_dev('SvelteDOMSetAttribute', { node, attribute, value });
     }
+    function set_data_dev(text, data) {
+        data = '' + data;
+        if (text.data === data)
+            return;
+        dispatch_dev('SvelteDOMSetData', { node: text, data });
+        text.data = data;
+    }
     function validate_slots(name, slot, keys) {
         for (const slot_key of Object.keys(slot)) {
             if (!~keys.indexOf(slot_key)) {
@@ -414,80 +421,96 @@ var app = (function () {
     const file$1 = "src\\Cloud.svelte";
 
     function create_fragment$1(ctx) {
+    	let a;
     	let div3;
     	let svg;
     	let path;
     	let t0;
     	let div1;
     	let div0;
+    	let t1;
     	let t2;
     	let div2;
+    	let t3;
     	let mounted;
     	let dispose;
 
     	const block = {
     		c: function create() {
+    			a = element("a");
     			div3 = element("div");
     			svg = svg_element("svg");
     			path = svg_element("path");
     			t0 = space();
     			div1 = element("div");
     			div0 = element("div");
-    			div0.textContent = `${/*title*/ ctx[1]}`;
+    			t1 = text(/*title*/ ctx[0]);
     			t2 = space();
     			div2 = element("div");
-    			div2.textContent = `${/*description*/ ctx[2]}`;
+    			t3 = text(/*description*/ ctx[1]);
     			attr_dev(path, "d", "M 0,6 \r\n           a 10,10 1 0,0 0,25 \r\n           h 45 \r\n           a 10,10 1 0,0 0,-25 \r\n           a 10,10 1 0,0 -15,-5 \r\n           a 15,15 1 0,0 -29, 5  \r\n           z");
-    			attr_dev(path, "class", "svelte-1sp3egj");
-    			add_location(path, file$1, 23, 4, 535);
+    			attr_dev(path, "class", "svelte-jroyuc");
+    			add_location(path, file$1, 25, 6, 568);
     			attr_dev(svg, "viewBox", "15 -10 15 42");
-    			attr_dev(svg, "class", "path-container svelte-1sp3egj");
-    			toggle_class(svg, "halo", /*hovered*/ ctx[0]);
-    			add_location(svg, file$1, 22, 2, 457);
-    			add_location(div0, file$1, 36, 4, 854);
-    			attr_dev(div1, "class", "text-container svelte-1sp3egj");
-    			add_location(div1, file$1, 35, 2, 820);
-    			attr_dev(div2, "class", "info svelte-1sp3egj");
-    			toggle_class(div2, "show", /*hovered*/ ctx[0]);
-    			add_location(div2, file$1, 38, 2, 886);
-    			attr_dev(div3, "class", "cloud svelte-1sp3egj");
-    			add_location(div3, file$1, 21, 0, 434);
+    			attr_dev(svg, "class", "path-container svelte-jroyuc");
+    			toggle_class(svg, "halo", /*hovered*/ ctx[3]);
+    			add_location(svg, file$1, 24, 4, 488);
+    			add_location(div0, file$1, 38, 6, 901);
+    			attr_dev(div1, "class", "text-container svelte-jroyuc");
+    			add_location(div1, file$1, 37, 4, 865);
+    			attr_dev(div2, "class", "info svelte-jroyuc");
+    			toggle_class(div2, "show", /*hovered*/ ctx[3]);
+    			add_location(div2, file$1, 40, 4, 937);
+    			attr_dev(div3, "class", "cloud svelte-jroyuc");
+    			add_location(div3, file$1, 23, 2, 463);
+    			attr_dev(a, "href", /*link*/ ctx[2]);
+    			add_location(a, file$1, 22, 0, 444);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div3, anchor);
+    			insert_dev(target, a, anchor);
+    			append_dev(a, div3);
     			append_dev(div3, svg);
     			append_dev(svg, path);
     			append_dev(div3, t0);
     			append_dev(div3, div1);
     			append_dev(div1, div0);
+    			append_dev(div0, t1);
     			append_dev(div3, t2);
     			append_dev(div3, div2);
+    			append_dev(div2, t3);
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(path, "mouseenter", /*showInfoPanel*/ ctx[3], false, false, false, false),
-    					listen_dev(path, "mouseleave", /*hideInfoPanel*/ ctx[4], false, false, false, false)
+    					listen_dev(path, "mouseenter", /*showInfoPanel*/ ctx[4], false, false, false, false),
+    					listen_dev(path, "mouseleave", /*hideInfoPanel*/ ctx[5], false, false, false, false)
     				];
 
     				mounted = true;
     			}
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*hovered*/ 1) {
-    				toggle_class(svg, "halo", /*hovered*/ ctx[0]);
+    			if (dirty & /*hovered*/ 8) {
+    				toggle_class(svg, "halo", /*hovered*/ ctx[3]);
     			}
 
-    			if (dirty & /*hovered*/ 1) {
-    				toggle_class(div2, "show", /*hovered*/ ctx[0]);
+    			if (dirty & /*title*/ 1) set_data_dev(t1, /*title*/ ctx[0]);
+    			if (dirty & /*description*/ 2) set_data_dev(t3, /*description*/ ctx[1]);
+
+    			if (dirty & /*hovered*/ 8) {
+    				toggle_class(div2, "show", /*hovered*/ ctx[3]);
+    			}
+
+    			if (dirty & /*link*/ 4) {
+    				attr_dev(a, "href", /*link*/ ctx[2]);
     			}
     		},
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div3);
+    			if (detaching) detach_dev(a);
     			mounted = false;
     			run_all(dispose);
     		}
@@ -507,57 +530,87 @@ var app = (function () {
     function instance$1($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Cloud', slots, []);
-    	let title = "DnD";
-    	let description = "example description mlem";
-    	let size = "5";
+    	let { title } = $$props;
+    	let { description } = $$props;
+    	let { size = "5" } = $$props;
+    	let { link = "/" } = $$props;
     	let hovered = false;
 
     	const showInfoPanel = () => {
-    		$$invalidate(0, hovered = true);
+    		$$invalidate(3, hovered = true);
     	};
 
     	const hideInfoPanel = () => {
-    		$$invalidate(0, hovered = false);
+    		$$invalidate(3, hovered = false);
     	};
 
-    	const writable_props = [];
+    	$$self.$$.on_mount.push(function () {
+    		if (title === undefined && !('title' in $$props || $$self.$$.bound[$$self.$$.props['title']])) {
+    			console.warn("<Cloud> was created without expected prop 'title'");
+    		}
+
+    		if (description === undefined && !('description' in $$props || $$self.$$.bound[$$self.$$.props['description']])) {
+    			console.warn("<Cloud> was created without expected prop 'description'");
+    		}
+    	});
+
+    	const writable_props = ['title', 'description', 'size', 'link'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Cloud> was created with unknown prop '${key}'`);
     	});
 
+    	$$self.$$set = $$props => {
+    		if ('title' in $$props) $$invalidate(0, title = $$props.title);
+    		if ('description' in $$props) $$invalidate(1, description = $$props.description);
+    		if ('size' in $$props) $$invalidate(6, size = $$props.size);
+    		if ('link' in $$props) $$invalidate(2, link = $$props.link);
+    	};
+
     	$$self.$capture_state = () => ({
     		title,
     		description,
     		size,
+    		link,
     		hovered,
     		showInfoPanel,
     		hideInfoPanel
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('title' in $$props) $$invalidate(1, title = $$props.title);
-    		if ('description' in $$props) $$invalidate(2, description = $$props.description);
-    		if ('size' in $$props) $$invalidate(5, size = $$props.size);
-    		if ('hovered' in $$props) $$invalidate(0, hovered = $$props.hovered);
+    		if ('title' in $$props) $$invalidate(0, title = $$props.title);
+    		if ('description' in $$props) $$invalidate(1, description = $$props.description);
+    		if ('size' in $$props) $$invalidate(6, size = $$props.size);
+    		if ('link' in $$props) $$invalidate(2, link = $$props.link);
+    		if ('hovered' in $$props) $$invalidate(3, hovered = $$props.hovered);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	{
-    		// @ts-ignore
-    		document.querySelector(":root").style.setProperty("--size", size + "rem");
-    	}
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*size*/ 64) {
+    			{
+    				// @ts-ignore
+    				document.querySelector(":root").style.setProperty("--size", size + "rem");
+    			}
+    		}
+    	};
 
-    	return [hovered, title, description, showInfoPanel, hideInfoPanel];
+    	return [title, description, link, hovered, showInfoPanel, hideInfoPanel, size];
     }
 
     class Cloud extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$1, create_fragment$1, safe_not_equal, {});
+
+    		init(this, options, instance$1, create_fragment$1, safe_not_equal, {
+    			title: 0,
+    			description: 1,
+    			size: 6,
+    			link: 2
+    		});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -566,6 +619,38 @@ var app = (function () {
     			id: create_fragment$1.name
     		});
     	}
+
+    	get title() {
+    		throw new Error("<Cloud>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set title(value) {
+    		throw new Error("<Cloud>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get description() {
+    		throw new Error("<Cloud>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set description(value) {
+    		throw new Error("<Cloud>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get size() {
+    		throw new Error("<Cloud>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set size(value) {
+    		throw new Error("<Cloud>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get link() {
+    		throw new Error("<Cloud>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set link(value) {
+    		throw new Error("<Cloud>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
     }
 
     /* src\App.svelte generated by Svelte v3.59.1 */
@@ -573,15 +658,34 @@ var app = (function () {
 
     function create_fragment(ctx) {
     	let main;
-    	let cloud;
+    	let cloud0;
+    	let t0;
+    	let cloud1;
+    	let t1;
+    	let cloud2;
     	let current;
-    	cloud = new Cloud({ $$inline: true });
+
+    	cloud0 = new Cloud({
+    			props: {
+    				title: 'DnD',
+    				description: 'DnD dice roller',
+    				link: '/dnd'
+    			},
+    			$$inline: true
+    		});
+
+    	cloud1 = new Cloud({ $$inline: true });
+    	cloud2 = new Cloud({ $$inline: true });
 
     	const block = {
     		c: function create() {
     			main = element("main");
-    			create_component(cloud.$$.fragment);
-    			attr_dev(main, "class", "svelte-w08hif");
+    			create_component(cloud0.$$.fragment);
+    			t0 = space();
+    			create_component(cloud1.$$.fragment);
+    			t1 = space();
+    			create_component(cloud2.$$.fragment);
+    			attr_dev(main, "class", "svelte-srubxg");
     			add_location(main, file, 6, 0, 81);
     		},
     		l: function claim(nodes) {
@@ -589,22 +693,32 @@ var app = (function () {
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, main, anchor);
-    			mount_component(cloud, main, null);
+    			mount_component(cloud0, main, null);
+    			append_dev(main, t0);
+    			mount_component(cloud1, main, null);
+    			append_dev(main, t1);
+    			mount_component(cloud2, main, null);
     			current = true;
     		},
     		p: noop,
     		i: function intro(local) {
     			if (current) return;
-    			transition_in(cloud.$$.fragment, local);
+    			transition_in(cloud0.$$.fragment, local);
+    			transition_in(cloud1.$$.fragment, local);
+    			transition_in(cloud2.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
-    			transition_out(cloud.$$.fragment, local);
+    			transition_out(cloud0.$$.fragment, local);
+    			transition_out(cloud1.$$.fragment, local);
+    			transition_out(cloud2.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(main);
-    			destroy_component(cloud);
+    			destroy_component(cloud0);
+    			destroy_component(cloud1);
+    			destroy_component(cloud2);
     		}
     	};
 

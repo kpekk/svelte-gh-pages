@@ -5,15 +5,16 @@
 </script>
 
 <main>
-	<Cloud></Cloud>
+	<Cloud title={'DnD'} description={'DnD dice roller'} link={'/dnd'}/>
+	<Cloud/>
+	<Cloud/>
 </main>
 
 <style>
 	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
 		margin: 0 auto;
+		display: flex;
+		flex-wrap: wrap;
 	}
 	
 	:root {
