@@ -415,11 +415,11 @@ var app = (function () {
 
     function create_fragment$1(ctx) {
     	let div3;
-    	let div1;
-    	let div0;
-    	let t1;
     	let svg;
     	let path;
+    	let t0;
+    	let div1;
+    	let div0;
     	let t2;
     	let div2;
     	let mounted;
@@ -428,40 +428,41 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			div3 = element("div");
+    			svg = svg_element("svg");
+    			path = svg_element("path");
+    			t0 = space();
     			div1 = element("div");
     			div0 = element("div");
     			div0.textContent = `${/*title*/ ctx[1]}`;
-    			t1 = space();
-    			svg = svg_element("svg");
-    			path = svg_element("path");
     			t2 = space();
     			div2 = element("div");
     			div2.textContent = `${/*description*/ ctx[2]}`;
-    			add_location(div0, file$1, 23, 6, 540);
-    			attr_dev(div1, "class", "text-container svelte-z5vxoa");
-    			add_location(div1, file$1, 22, 4, 504);
     			attr_dev(path, "d", "M 0,6 \r\n           a 10,10 1 0,0 0,25 \r\n           h 45 \r\n           a 10,10 1 0,0 0,-25 \r\n           a 10,10 1 0,0 -15,-5 \r\n           a 15,15 1 0,0 -29, 5  \r\n           z");
-    			attr_dev(path, "class", "svelte-z5vxoa");
-    			add_location(path, file$1, 26, 6, 612);
+    			attr_dev(path, "class", "svelte-1sp3egj");
+    			add_location(path, file$1, 23, 4, 535);
     			attr_dev(svg, "viewBox", "15 -10 15 42");
-    			attr_dev(svg, "class", "svelte-z5vxoa");
-    			add_location(svg, file$1, 25, 4, 576);
-    			attr_dev(div2, "class", "info svelte-z5vxoa");
-    			toggle_class(div2, "show-info", /*showInfo*/ ctx[0]);
-    			add_location(div2, file$1, 38, 4, 909);
-    			attr_dev(div3, "class", "cloud svelte-z5vxoa");
-    			add_location(div3, file$1, 21, 2, 479);
+    			attr_dev(svg, "class", "path-container svelte-1sp3egj");
+    			toggle_class(svg, "halo", /*hovered*/ ctx[0]);
+    			add_location(svg, file$1, 22, 2, 457);
+    			add_location(div0, file$1, 36, 4, 854);
+    			attr_dev(div1, "class", "text-container svelte-1sp3egj");
+    			add_location(div1, file$1, 35, 2, 820);
+    			attr_dev(div2, "class", "info svelte-1sp3egj");
+    			toggle_class(div2, "show", /*hovered*/ ctx[0]);
+    			add_location(div2, file$1, 38, 2, 886);
+    			attr_dev(div3, "class", "cloud svelte-1sp3egj");
+    			add_location(div3, file$1, 21, 0, 434);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div3, anchor);
-    			append_dev(div3, div1);
-    			append_dev(div1, div0);
-    			append_dev(div3, t1);
     			append_dev(div3, svg);
     			append_dev(svg, path);
+    			append_dev(div3, t0);
+    			append_dev(div3, div1);
+    			append_dev(div1, div0);
     			append_dev(div3, t2);
     			append_dev(div3, div2);
 
@@ -475,8 +476,12 @@ var app = (function () {
     			}
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*showInfo*/ 1) {
-    				toggle_class(div2, "show-info", /*showInfo*/ ctx[0]);
+    			if (dirty & /*hovered*/ 1) {
+    				toggle_class(svg, "halo", /*hovered*/ ctx[0]);
+    			}
+
+    			if (dirty & /*hovered*/ 1) {
+    				toggle_class(div2, "show", /*hovered*/ ctx[0]);
     			}
     		},
     		i: noop,
@@ -505,14 +510,14 @@ var app = (function () {
     	let title = "DnD";
     	let description = "example description mlem";
     	let size = "5";
-    	let showInfo = false;
+    	let hovered = false;
 
     	const showInfoPanel = () => {
-    		$$invalidate(0, showInfo = true);
+    		$$invalidate(0, hovered = true);
     	};
 
     	const hideInfoPanel = () => {
-    		$$invalidate(0, showInfo = false);
+    		$$invalidate(0, hovered = false);
     	};
 
     	const writable_props = [];
@@ -525,7 +530,7 @@ var app = (function () {
     		title,
     		description,
     		size,
-    		showInfo,
+    		hovered,
     		showInfoPanel,
     		hideInfoPanel
     	});
@@ -534,7 +539,7 @@ var app = (function () {
     		if ('title' in $$props) $$invalidate(1, title = $$props.title);
     		if ('description' in $$props) $$invalidate(2, description = $$props.description);
     		if ('size' in $$props) $$invalidate(5, size = $$props.size);
-    		if ('showInfo' in $$props) $$invalidate(0, showInfo = $$props.showInfo);
+    		if ('hovered' in $$props) $$invalidate(0, hovered = $$props.hovered);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -546,7 +551,7 @@ var app = (function () {
     		document.querySelector(":root").style.setProperty("--size", size + "rem");
     	}
 
-    	return [showInfo, title, description, showInfoPanel, hideInfoPanel];
+    	return [hovered, title, description, showInfoPanel, hideInfoPanel];
     }
 
     class Cloud extends SvelteComponentDev {
@@ -576,7 +581,7 @@ var app = (function () {
     		c: function create() {
     			main = element("main");
     			create_component(cloud.$$.fragment);
-    			attr_dev(main, "class", "svelte-1tky8bj");
+    			attr_dev(main, "class", "svelte-w08hif");
     			add_location(main, file, 6, 0, 81);
     		},
     		l: function claim(nodes) {
