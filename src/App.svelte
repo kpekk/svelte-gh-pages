@@ -1,24 +1,14 @@
 <script>
-    import Cloud from "./Cloud.svelte";
-
-	//export let name;
+	import Header from "./Header.svelte";
+	import SpotifyPlayer from "./SpotifyPlayer.svelte";
+	import GoogleCalendar from "./GoogleCalendar.svelte";
+	import TodoList from "./TodoList.svelte";
 </script>
 
-<main>
-	<Cloud title={'DnD'} description={'DnD dice roller'} link={'/dnd'}/>
-	<Cloud/>
-	<Cloud/>
-</main>
+<Header/>
+<GoogleCalendar/>
 
-<style>
-	main {
-		margin: 0 auto;
-		display: flex;
-		flex-wrap: wrap;
-	}
-	
-	:root {
-    font-size: 18px;
-  }
+	<TodoList />
 
-</style>
+<SpotifyPlayer />
+
