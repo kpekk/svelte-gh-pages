@@ -15,12 +15,12 @@
     .header-container {
         position: relative;
         width: 100%;
-        height: 2.5rem;
+        height: 2rem;
 
         background-color: rgb(46, 46, 46);
 
         color: white;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         display: flex;
         
         align-items: center;
@@ -38,7 +38,7 @@
 
     .username {
         position: absolute;
-        top: 0.25rem;
+        top: 0.2rem;
         right: 1rem;
     }
 </style>

@@ -8,7 +8,7 @@
     ];
 </script>
 
-<div class="todolist-container">
+<div class="todolist-container widget">
     <div class="todolist-title">TODO</div>
     <div class="todolist-elem-list">
         {#each elems as elem}
@@ -23,16 +23,13 @@
 <style>
     .todolist-container {
         height: 20rem;
-        width: 30rem;
+        width: 40%;
         margin: 0.5rem;
-        margin-bottom: 0;
 
         box-sizing: border-box;
         padding: 1rem;
 
         color: white;
-        background-color: rgba(14, 17, 59, 0.4);
-        border-radius: 1rem;
     }
 
     .todolist-title {
