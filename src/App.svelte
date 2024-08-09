@@ -1,20 +1,18 @@
 <script>
-	import Header from "./Header.svelte";
-	import WeatherWidget from "./WeatherWidget.svelte";
-	import WifiWidget from "./WifiWidget.svelte";
-	import SpotifyPlayer from "./SpotifyPlayer.svelte";
-	import GoogleCalendar from "./GoogleCalendar.svelte";
-	import TodoList from "./TodoList.svelte";
+	import Test from "./pages/Test.svelte";
+    import Router from 'svelte-spa-router';
+	import AnotherPage from "./pages/AnotherPage.svelte";
+
+    // Define routes
+    const routes = {
+        '/': Test,
+		'/another' : AnotherPage
+		};
 </script>
+<Router {routes} />
 
-<Header />
-<GoogleCalendar />
-
-<div style="display: flex;">
-	<TodoList />
-	<WeatherWidget />
-	
-	<SpotifyPlayer />
-
-</div>
+<nav>
+    <a href="#/">Home</a>
+	<a href="#/another">another</a>
+</nav>
 
