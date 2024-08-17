@@ -69,6 +69,10 @@ var app = (function () {
     function empty() {
         return text('');
     }
+    function listen(node, event, handler, options) {
+        node.addEventListener(event, handler, options);
+        return () => node.removeEventListener(event, handler, options);
+    }
     function attr(node, attribute, value) {
         if (value == null)
             node.removeAttribute(attribute);
@@ -92,6 +96,18 @@ var app = (function () {
         if (!current_component)
             throw new Error('Function called outside component initialization');
         return current_component;
+    }
+    /**
+     * The `onMount` function schedules a callback to run as soon as the component has been mounted to the DOM.
+     * It must be called during the component's initialisation (but doesn't need to live *inside* the component;
+     * it can be called from an external module).
+     *
+     * `onMount` does not run inside a [server-side component](/docs#run-time-server-side-component-api).
+     *
+     * https://svelte.dev/docs#run-time-svelte-onmount
+     */
+    function onMount(fn) {
+        get_current_component().$$.on_mount.push(fn);
     }
     /**
      * Schedules a callback to run immediately after the component has been updated.
@@ -488,12 +504,34 @@ var app = (function () {
         dispatch_dev('SvelteDOMRemove', { node });
         detach(node);
     }
+    function listen_dev(node, event, handler, options, has_prevent_default, has_stop_propagation, has_stop_immediate_propagation) {
+        const modifiers = options === true ? ['capture'] : options ? Array.from(Object.keys(options)) : [];
+        if (has_prevent_default)
+            modifiers.push('preventDefault');
+        if (has_stop_propagation)
+            modifiers.push('stopPropagation');
+        if (has_stop_immediate_propagation)
+            modifiers.push('stopImmediatePropagation');
+        dispatch_dev('SvelteDOMAddEventListener', { node, event, handler, modifiers });
+        const dispose = listen(node, event, handler, options);
+        return () => {
+            dispatch_dev('SvelteDOMRemoveEventListener', { node, event, handler, modifiers });
+            dispose();
+        };
+    }
     function attr_dev(node, attribute, value) {
         attr(node, attribute, value);
         if (value == null)
             dispatch_dev('SvelteDOMRemoveAttribute', { node, attribute });
         else
             dispatch_dev('SvelteDOMSetAttribute', { node, attribute, value });
+    }
+    function set_data_dev(text, data) {
+        data = '' + data;
+        if (text.data === data)
+            return;
+        dispatch_dev('SvelteDOMSetData', { node: text, data });
+        text.data = data;
     }
     function validate_slots(name, slot, keys) {
         for (const slot_key of Object.keys(slot)) {
@@ -546,6 +584,7 @@ var app = (function () {
     const file$3 = "src\\components\\Pulse.svelte";
 
     function create_fragment$4(ctx) {
+    	let div3;
     	let div2;
     	let div0;
     	let div0_class_value;
@@ -555,39 +594,55 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
+    			div3 = element("div");
     			div2 = element("div");
     			div0 = element("div");
     			t = space();
     			div1 = element("div");
-    			attr_dev(div0, "class", div0_class_value = "pulse pulse-big pulse-" + /*color*/ ctx[0] + " svelte-ybqftf");
-    			add_location(div0, file$3, 5, 4, 92);
-    			attr_dev(div1, "class", div1_class_value = "pulse pulse-small pulse-" + /*color*/ ctx[0] + " svelte-ybqftf");
-    			add_location(div1, file$3, 6, 4, 147);
-    			attr_dev(div2, "class", "pulse-container svelte-ybqftf");
-    			add_location(div2, file$3, 4, 0, 57);
+
+    			attr_dev(div0, "class", div0_class_value = "pulse pulse-big " + (/*infinite*/ ctx[1]
+    			? 'pulse-' + /*color*/ ctx[0] + '-infinite'
+    			: '') + " svelte-hz7oxb");
+
+    			add_location(div0, file$3, 27, 8, 859);
+
+    			attr_dev(div1, "class", div1_class_value = "pulse pulse-small " + (/*infinite*/ ctx[1]
+    			? 'pulse-' + /*color*/ ctx[0] + '-infinite'
+    			: '') + " svelte-hz7oxb");
+
+    			add_location(div1, file$3, 31, 8, 989);
+    			attr_dev(div2, "class", "pulse-container svelte-hz7oxb");
+    			add_location(div2, file$3, 26, 4, 820);
+    			attr_dev(div3, "class", "absolute-container svelte-hz7oxb");
+    			add_location(div3, file$3, 25, 0, 782);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div2, anchor);
+    			insert_dev(target, div3, anchor);
+    			append_dev(div3, div2);
     			append_dev(div2, div0);
     			append_dev(div2, t);
     			append_dev(div2, div1);
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*color*/ 1 && div0_class_value !== (div0_class_value = "pulse pulse-big pulse-" + /*color*/ ctx[0] + " svelte-ybqftf")) {
+    			if (dirty & /*infinite, color*/ 3 && div0_class_value !== (div0_class_value = "pulse pulse-big " + (/*infinite*/ ctx[1]
+    			? 'pulse-' + /*color*/ ctx[0] + '-infinite'
+    			: '') + " svelte-hz7oxb")) {
     				attr_dev(div0, "class", div0_class_value);
     			}
 
-    			if (dirty & /*color*/ 1 && div1_class_value !== (div1_class_value = "pulse pulse-small pulse-" + /*color*/ ctx[0] + " svelte-ybqftf")) {
+    			if (dirty & /*infinite, color*/ 3 && div1_class_value !== (div1_class_value = "pulse pulse-small " + (/*infinite*/ ctx[1]
+    			? 'pulse-' + /*color*/ ctx[0] + '-infinite'
+    			: '') + " svelte-hz7oxb")) {
     				attr_dev(div1, "class", div1_class_value);
     			}
     		},
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div2);
+    			if (detaching) detach_dev(div3);
     		}
     	};
 
@@ -605,8 +660,31 @@ var app = (function () {
     function instance$4($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Pulse', slots, []);
-    	let { color = 'purple' } = $$props;
-    	const writable_props = ['color'];
+    	let { color = "purple" } = $$props;
+    	let { infinite = true } = $$props;
+
+    	const triggerAnimation = () => {
+    		if (!infinite) {
+    			const className = "pulse-" + color + "-once";
+    			let elements = document.getElementsByClassName("pulse");
+
+    			for (let element of elements) {
+    				element.classList.remove(className);
+    				void element.offsetWidth;
+    				element.classList.add(className);
+
+    				element.addEventListener(
+    					"animationend",
+    					function () {
+    						element.classList.remove("pulse-once");
+    					},
+    					{ once: true }
+    				);
+    			}
+    		}
+    	};
+
+    	const writable_props = ['color', 'infinite'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Pulse> was created with unknown prop '${key}'`);
@@ -614,25 +692,32 @@ var app = (function () {
 
     	$$self.$$set = $$props => {
     		if ('color' in $$props) $$invalidate(0, color = $$props.color);
+    		if ('infinite' in $$props) $$invalidate(1, infinite = $$props.infinite);
     	};
 
-    	$$self.$capture_state = () => ({ color });
+    	$$self.$capture_state = () => ({ color, infinite, triggerAnimation });
 
     	$$self.$inject_state = $$props => {
     		if ('color' in $$props) $$invalidate(0, color = $$props.color);
+    		if ('infinite' in $$props) $$invalidate(1, infinite = $$props.infinite);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [color];
+    	return [color, infinite, triggerAnimation];
     }
 
     class Pulse extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$4, create_fragment$4, safe_not_equal, { color: 0 });
+
+    		init(this, options, instance$4, create_fragment$4, safe_not_equal, {
+    			color: 0,
+    			infinite: 1,
+    			triggerAnimation: 2
+    		});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -649,6 +734,22 @@ var app = (function () {
     	set color(value) {
     		throw new Error("<Pulse>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
+
+    	get infinite() {
+    		throw new Error("<Pulse>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set infinite(value) {
+    		throw new Error("<Pulse>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get triggerAnimation() {
+    		return this.$$.ctx[2];
+    	}
+
+    	set triggerAnimation(value) {
+    		throw new Error("<Pulse>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
     }
 
     /* src\pages\Test.svelte generated by Svelte v3.59.1 */
@@ -658,6 +759,10 @@ var app = (function () {
     	let h1;
     	let t1;
     	let pulse;
+    	let t2;
+    	let a0;
+    	let t4;
+    	let a1;
     	let current;
     	pulse = new Pulse({ props: { color: "red" }, $$inline: true });
 
@@ -667,7 +772,17 @@ var app = (function () {
     			h1.textContent = "totally new page!!!!!!";
     			t1 = space();
     			create_component(pulse.$$.fragment);
+    			t2 = space();
+    			a0 = element("a");
+    			a0.textContent = "Home";
+    			t4 = space();
+    			a1 = element("a");
+    			a1.textContent = "another";
     			add_location(h1, file$2, 4, 0, 76);
+    			attr_dev(a0, "href", "#/");
+    			add_location(a0, file$2, 7, 0, 133);
+    			attr_dev(a1, "href", "#/another");
+    			add_location(a1, file$2, 8, 0, 156);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -676,6 +791,10 @@ var app = (function () {
     			insert_dev(target, h1, anchor);
     			insert_dev(target, t1, anchor);
     			mount_component(pulse, target, anchor);
+    			insert_dev(target, t2, anchor);
+    			insert_dev(target, a0, anchor);
+    			insert_dev(target, t4, anchor);
+    			insert_dev(target, a1, anchor);
     			current = true;
     		},
     		p: noop,
@@ -692,6 +811,10 @@ var app = (function () {
     			if (detaching) detach_dev(h1);
     			if (detaching) detach_dev(t1);
     			destroy_component(pulse, detaching);
+    			if (detaching) detach_dev(t2);
+    			if (detaching) detach_dev(a0);
+    			if (detaching) detach_dev(t4);
+    			if (detaching) detach_dev(a1);
     		}
     	};
 
@@ -1761,30 +1884,107 @@ var app = (function () {
     	}
     }
 
-    /* src\pages\AnotherPage.svelte generated by Svelte v3.59.1 */
-
-    const file$1 = "src\\pages\\AnotherPage.svelte";
+    /* src\pages\Pets.svelte generated by Svelte v3.59.1 */
+    const file$1 = "src\\pages\\Pets.svelte";
 
     function create_fragment$1(ctx) {
-    	let h2;
+    	let meta;
+    	let t0;
+    	let body;
+    	let div0;
+    	let t2;
+    	let div2;
+    	let div1;
+    	let t3;
+    	let t4;
+    	let pulse_1;
+    	let t5;
+    	let div3;
+    	let current;
+    	let mounted;
+    	let dispose;
+    	let pulse_1_props = { infinite: false };
+    	pulse_1 = new Pulse({ props: pulse_1_props, $$inline: true });
+    	/*pulse_1_binding*/ ctx[3](pulse_1);
 
     	const block = {
     		c: function create() {
-    			h2 = element("h2");
-    			h2.textContent = "another page eiwiwiwiwiwi";
-    			add_location(h2, file$1, 0, 0, 0);
+    			meta = element("meta");
+    			t0 = space();
+    			body = element("body");
+    			div0 = element("div");
+    			div0.textContent = "Sorri kutid, ma ei saa täna välja tulla, sest";
+    			t2 = space();
+    			div2 = element("div");
+    			div1 = element("div");
+    			t3 = text(/*currentExcuse*/ ctx[0]);
+    			t4 = space();
+    			create_component(pulse_1.$$.fragment);
+    			t5 = space();
+    			div3 = element("div");
+    			div3.textContent = "Ei Pets, tule ikka!";
+    			attr_dev(meta, "name", "description");
+    			attr_dev(meta, "content", "pets ei saa linna tulla, sest...");
+    			add_location(meta, file$1, 39, 4, 1111);
+    			document.title = "petsi vabanduste generaator";
+    			attr_dev(div0, "class", "pets-heading svelte-he37bu");
+    			add_location(div0, file$1, 44, 4, 1261);
+    			attr_dev(div1, "id", "pets-response");
+    			attr_dev(div1, "class", "svelte-he37bu");
+    			add_location(div1, file$1, 48, 8, 1402);
+    			attr_dev(div2, "class", "response-container svelte-he37bu");
+    			add_location(div2, file$1, 47, 4, 1360);
+    			attr_dev(div3, "id", "pets-button");
+    			attr_dev(div3, "class", "svelte-he37bu");
+    			add_location(div3, file$1, 51, 4, 1519);
+    			attr_dev(body, "class", "svelte-he37bu");
+    			add_location(body, file$1, 43, 0, 1249);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, h2, anchor);
+    			append_dev(document.head, meta);
+    			insert_dev(target, t0, anchor);
+    			insert_dev(target, body, anchor);
+    			append_dev(body, div0);
+    			append_dev(body, t2);
+    			append_dev(body, div2);
+    			append_dev(div2, div1);
+    			append_dev(div1, t3);
+    			append_dev(div2, t4);
+    			mount_component(pulse_1, div2, null);
+    			append_dev(body, t5);
+    			append_dev(body, div3);
+    			current = true;
+
+    			if (!mounted) {
+    				dispose = listen_dev(div3, "click", /*generateExcuse*/ ctx[2], false, false, false, false);
+    				mounted = true;
+    			}
     		},
-    		p: noop,
-    		i: noop,
-    		o: noop,
+    		p: function update(ctx, [dirty]) {
+    			if (!current || dirty & /*currentExcuse*/ 1) set_data_dev(t3, /*currentExcuse*/ ctx[0]);
+    			const pulse_1_changes = {};
+    			pulse_1.$set(pulse_1_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(pulse_1.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(pulse_1.$$.fragment, local);
+    			current = false;
+    		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(h2);
+    			detach_dev(meta);
+    			if (detaching) detach_dev(t0);
+    			if (detaching) detach_dev(body);
+    			/*pulse_1_binding*/ ctx[3](null);
+    			destroy_component(pulse_1);
+    			mounted = false;
+    			dispose();
     		}
     	};
 
@@ -1799,26 +1999,86 @@ var app = (function () {
     	return block;
     }
 
-    function instance$1($$self, $$props) {
+    function instance$1($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
-    	validate_slots('AnotherPage', slots, []);
+    	validate_slots('Pets', slots, []);
+    	let currentExcuse = "";
+    	let pulse;
+
+    	const generateExcuse = () => {
+    		pulse.triggerAnimation();
+
+    		const allExcuses = [
+    			"Eesti Vabariigil on sünnipäev",
+    			"mu õel on sünnipäev",
+    			"mu emal on sünnipäev",
+    			"mu isal on sünnipäev",
+    			"mul on janu",
+    			"mul on nälg",
+    			"ma pean jõuksi minema",
+    			"mul on poeg",
+    			"mul on tütar",
+    			"õues on liiga külm",
+    			"õues on liiga soe",
+    			"maximas on õlu liiga kallis",
+    			"ma nägin oravat",
+    			"minust saab homme president"
+    		];
+
+    		let excuse = allExcuses[Math.floor(Math.random() * allExcuses.length)];
+
+    		while (currentExcuse === excuse) {
+    			excuse = allExcuses[Math.floor(Math.random() * allExcuses.length)];
+    		}
+
+    		$$invalidate(0, currentExcuse = excuse);
+    	};
+
+    	onMount(() => {
+    		generateExcuse();
+    	});
+
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<AnotherPage> was created with unknown prop '${key}'`);
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Pets> was created with unknown prop '${key}'`);
     	});
 
-    	return [];
+    	function pulse_1_binding($$value) {
+    		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
+    			pulse = $$value;
+    			$$invalidate(1, pulse);
+    		});
+    	}
+
+    	$$self.$capture_state = () => ({
+    		onMount,
+    		Pulse,
+    		currentExcuse,
+    		pulse,
+    		generateExcuse
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ('currentExcuse' in $$props) $$invalidate(0, currentExcuse = $$props.currentExcuse);
+    		if ('pulse' in $$props) $$invalidate(1, pulse = $$props.pulse);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [currentExcuse, pulse, generateExcuse, pulse_1_binding];
     }
 
-    class AnotherPage extends SvelteComponentDev {
+    class Pets extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
     		init(this, options, instance$1, create_fragment$1, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
-    			tagName: "AnotherPage",
+    			tagName: "Pets",
     			options,
     			id: create_fragment$1.name
     		});
@@ -1829,12 +2089,13 @@ var app = (function () {
     const file = "src\\App.svelte";
 
     function create_fragment(ctx) {
+    	let meta0;
+    	let meta1;
+    	let meta2;
+    	let link0;
+    	let link1;
+    	let t;
     	let router;
-    	let t0;
-    	let nav;
-    	let a0;
-    	let t2;
-    	let a1;
     	let current;
 
     	router = new Router({
@@ -1844,30 +2105,41 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
+    			meta0 = element("meta");
+    			meta1 = element("meta");
+    			meta2 = element("meta");
+    			link0 = element("link");
+    			link1 = element("link");
+    			t = space();
     			create_component(router.$$.fragment);
-    			t0 = space();
-    			nav = element("nav");
-    			a0 = element("a");
-    			a0.textContent = "Home";
-    			t2 = space();
-    			a1 = element("a");
-    			a1.textContent = "another";
-    			attr_dev(a0, "href", "#/");
-    			add_location(a0, file, 14, 4, 298);
-    			attr_dev(a1, "href", "#/another");
-    			add_location(a1, file, 15, 1, 322);
-    			add_location(nav, file, 13, 0, 287);
+    			attr_dev(meta0, "charset", "UTF-8");
+    			add_location(meta0, file, 1, 4, 19);
+    			attr_dev(meta1, "name", "viewport");
+    			attr_dev(meta1, "content", "width=device-width, initial-scale=1.0");
+    			add_location(meta1, file, 2, 4, 49);
+    			attr_dev(meta2, "name", "author");
+    			attr_dev(meta2, "content", "Kristjan Pekk");
+    			add_location(meta2, file, 3, 4, 127);
+    			attr_dev(link0, "rel", "icon");
+    			attr_dev(link0, "href", "../icon.ico");
+    			attr_dev(link0, "type", "image/x-icon");
+    			add_location(link0, file, 5, 4, 181);
+    			attr_dev(link1, "rel", "stylesheet");
+    			attr_dev(link1, "type", "text/css");
+    			attr_dev(link1, "href", "../common.css");
+    			add_location(link1, file, 6, 4, 245);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
+    			append_dev(document.head, meta0);
+    			append_dev(document.head, meta1);
+    			append_dev(document.head, meta2);
+    			append_dev(document.head, link0);
+    			append_dev(document.head, link1);
+    			insert_dev(target, t, anchor);
     			mount_component(router, target, anchor);
-    			insert_dev(target, t0, anchor);
-    			insert_dev(target, nav, anchor);
-    			append_dev(nav, a0);
-    			append_dev(nav, t2);
-    			append_dev(nav, a1);
     			current = true;
     		},
     		p: noop,
@@ -1881,9 +2153,13 @@ var app = (function () {
     			current = false;
     		},
     		d: function destroy(detaching) {
+    			detach_dev(meta0);
+    			detach_dev(meta1);
+    			detach_dev(meta2);
+    			detach_dev(link0);
+    			detach_dev(link1);
+    			if (detaching) detach_dev(t);
     			destroy_component(router, detaching);
-    			if (detaching) detach_dev(t0);
-    			if (detaching) detach_dev(nav);
     		}
     	};
 
@@ -1901,14 +2177,14 @@ var app = (function () {
     function instance($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('App', slots, []);
-    	const routes = { '/': Test, '/another': AnotherPage };
+    	const routes = { '/': Test, '/another': Pets };
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<App> was created with unknown prop '${key}'`);
     	});
 
-    	$$self.$capture_state = () => ({ Test, Router, AnotherPage, routes });
+    	$$self.$capture_state = () => ({ Test, Router, Pets, routes });
     	return [routes];
     }
 
