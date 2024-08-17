@@ -9,11 +9,13 @@
     import Router from 'svelte-spa-router';
 	import Pets from "./pages/Pets.svelte";
     import Kelly from "./pages/Kelly.svelte";
+    import Yt from './pages/projects/YT.svelte';
 
     // Define routes
     const routes = {
 		'/pets' : Pets,
-        '/kelly' : Kelly
+        '/kelly' : Kelly,
+        '/projects/YT': Yt
 		};
 </script>
 <Router {routes} />
