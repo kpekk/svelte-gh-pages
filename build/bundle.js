@@ -1927,17 +1927,17 @@ var app = (function () {
     			attr_dev(meta, "content", "pets ei saa linna tulla, sest...");
     			add_location(meta, file$1, 39, 4, 1111);
     			document.title = "petsi vabanduste generaator";
-    			attr_dev(div0, "class", "pets-heading svelte-he37bu");
+    			attr_dev(div0, "class", "pets-heading svelte-19ln7th");
     			add_location(div0, file$1, 44, 4, 1261);
     			attr_dev(div1, "id", "pets-response");
-    			attr_dev(div1, "class", "svelte-he37bu");
+    			attr_dev(div1, "class", "svelte-19ln7th");
     			add_location(div1, file$1, 48, 8, 1402);
-    			attr_dev(div2, "class", "response-container svelte-he37bu");
+    			attr_dev(div2, "class", "response-container svelte-19ln7th");
     			add_location(div2, file$1, 47, 4, 1360);
     			attr_dev(div3, "id", "pets-button");
-    			attr_dev(div3, "class", "svelte-he37bu");
-    			add_location(div3, file$1, 51, 4, 1519);
-    			attr_dev(body, "class", "svelte-he37bu");
+    			attr_dev(div3, "class", "svelte-19ln7th");
+    			add_location(div3, file$1, 52, 4, 1581);
+    			attr_dev(body, "class", "svelte-19ln7th");
     			add_location(body, file$1, 43, 0, 1249);
     		},
     		l: function claim(nodes) {
