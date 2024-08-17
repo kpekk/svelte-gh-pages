@@ -2,7 +2,6 @@
     import { onMount } from "svelte";
     import Pulse from "../components/Pulse.svelte";
     let currentExcuse = "";
-
     let pulse;
 
     const generateExcuse = () => {
@@ -41,7 +40,7 @@
     <title>petsi vabanduste generaator</title>
 </svelte:head>
 
-<body>
+<div class="pets-container">
     <div class="pets-heading">
         Sorri kutid, ma ei saa täna välja tulla, sest
     </div>
@@ -51,10 +50,12 @@
     </div>
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div id="pets-button" on:click={generateExcuse}>Ei Pets, tule ikka!</div>
-</body>
+</div>
 
 <style>
-    body {
+    .pets-container {
+        height: 100%;
+        width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -62,10 +63,9 @@
     }
 
     .pets-heading {
-        margin-top: 5vh;
         height: 15vh;
         min-height: 80px;
-        font-size: 2rem;
+        font-size: 1.5rem;
         text-align: center;
     }
 
@@ -79,13 +79,13 @@
 
     #pets-response {
         height: 40vh;
-        text-align: center;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
         font-size: 2rem;
 
         display: flex;
-        justify-content: center;
         align-items: center;
-        position: relative;
+        text-align: center;
     }
 
     #pets-button {

@@ -1789,7 +1789,7 @@ var app = (function () {
     function create_fragment$2(ctx) {
     	let meta;
     	let t0;
-    	let body;
+    	let div4;
     	let div0;
     	let t2;
     	let div2;
@@ -1810,7 +1810,7 @@ var app = (function () {
     		c: function create() {
     			meta = element("meta");
     			t0 = space();
-    			body = element("body");
+    			div4 = element("div");
     			div0 = element("div");
     			div0.textContent = "Sorri kutid, ma ei saa täna välja tulla, sest";
     			t2 = space();
@@ -1826,18 +1826,18 @@ var app = (function () {
     			attr_dev(meta, "content", "pets ei saa linna tulla, sest...");
     			add_location(meta, file$2, 39, 4, 1111);
     			document.title = "petsi vabanduste generaator";
-    			attr_dev(div0, "class", "pets-heading svelte-19ln7th");
-    			add_location(div0, file$2, 44, 4, 1261);
+    			attr_dev(div0, "class", "pets-heading svelte-1uinm3r");
+    			add_location(div0, file$2, 44, 4, 1283);
     			attr_dev(div1, "id", "pets-response");
-    			attr_dev(div1, "class", "svelte-19ln7th");
-    			add_location(div1, file$2, 48, 8, 1402);
-    			attr_dev(div2, "class", "response-container svelte-19ln7th");
-    			add_location(div2, file$2, 47, 4, 1360);
+    			attr_dev(div1, "class", "svelte-1uinm3r");
+    			add_location(div1, file$2, 48, 8, 1424);
+    			attr_dev(div2, "class", "response-container svelte-1uinm3r");
+    			add_location(div2, file$2, 47, 4, 1382);
     			attr_dev(div3, "id", "pets-button");
-    			attr_dev(div3, "class", "svelte-19ln7th");
-    			add_location(div3, file$2, 52, 4, 1581);
-    			attr_dev(body, "class", "svelte-19ln7th");
-    			add_location(body, file$2, 43, 0, 1249);
+    			attr_dev(div3, "class", "svelte-1uinm3r");
+    			add_location(div3, file$2, 52, 4, 1603);
+    			attr_dev(div4, "class", "pets-container svelte-1uinm3r");
+    			add_location(div4, file$2, 43, 0, 1249);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1845,16 +1845,16 @@ var app = (function () {
     		m: function mount(target, anchor) {
     			append_dev(document.head, meta);
     			insert_dev(target, t0, anchor);
-    			insert_dev(target, body, anchor);
-    			append_dev(body, div0);
-    			append_dev(body, t2);
-    			append_dev(body, div2);
+    			insert_dev(target, div4, anchor);
+    			append_dev(div4, div0);
+    			append_dev(div4, t2);
+    			append_dev(div4, div2);
     			append_dev(div2, div1);
     			append_dev(div1, t3);
     			append_dev(div2, t4);
     			mount_component(pulse_1, div2, null);
-    			append_dev(body, t5);
-    			append_dev(body, div3);
+    			append_dev(div4, t5);
+    			append_dev(div4, div3);
     			current = true;
 
     			if (!mounted) {
@@ -1879,7 +1879,7 @@ var app = (function () {
     		d: function destroy(detaching) {
     			detach_dev(meta);
     			if (detaching) detach_dev(t0);
-    			if (detaching) detach_dev(body);
+    			if (detaching) detach_dev(div4);
     			/*pulse_1_binding*/ ctx[3](null);
     			destroy_component(pulse_1);
     			mounted = false;
