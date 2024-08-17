@@ -1,13 +1,46 @@
 <script>
-    export let color = 'purple';
+    export let color = "purple";
+    export let infinite = true;
+
+    export const triggerAnimation = () => {
+        if (!infinite) {
+            const className = "pulse-" + color + "-once";
+            let elements = document.getElementsByClassName("pulse");
+            for (let element of elements) {
+                element.classList.remove(className);
+                void element.offsetWidth;
+                element.classList.add(className);
+
+                element.addEventListener(
+                    "animationend",
+                    function () {
+                        element.classList.remove("pulse-once");
+                    },
+                    { once: true },
+                );
+            }
+        }
+    };
 </script>
 
-<div class="pulse-container">
-    <div class="pulse pulse-big pulse-{color}"></div>
-    <div class="pulse pulse-small pulse-{color}"></div>
+<div class="absolute-container">
+    <div class="pulse-container">
+        <div
+            class="pulse pulse-big
+            {infinite ? 'pulse-' + color + '-infinite' : ''}"
+        ></div>
+        <div
+            class="pulse pulse-small
+            {infinite ? 'pulse-' + color + '-infinite' : ''}"
+        ></div>
+    </div>
 </div>
 
 <style>
+    .absolute-container {
+        position: absolute;
+    }
+
     .pulse-container {
         position: relative;
         display: flex;
@@ -34,8 +67,28 @@
         animation-delay: 0.05s;
     }
 
-    .pulse-green {
+    .pulse-green-infinite {
         animation: pulse-green 1s infinite;
+    }
+
+    .pulse-green-once {
+        animation: pulse-green 1s forwards;
+    }
+
+    .pulse-red-infinite {
+        animation: pulse-red 1s infinite;
+    }
+
+    .pulse-red-once {
+        animation: pulse-red 1s forwards;
+    }
+
+    .pulse-purple-infinite {
+        animation: pulse-purple 1s infinite;
+    }
+
+    .pulse-purple-once {
+        animation: pulse-purple 1s forwards;
     }
 
     @keyframes pulse-green {
@@ -52,10 +105,6 @@
         }
     }
 
-    .pulse-red {
-        animation: pulse-red 1s infinite;
-    }
-
     @keyframes pulse-red {
         0% {
             box-shadow: 0 0 0 0 rgba(216, 1, 1, 0.7);
@@ -68,10 +117,6 @@
         100% {
             box-shadow: 0 0 0 0 rgba(51, 217, 178, 0);
         }
-    }
-
-    .pulse-purple {
-        animation: pulse-purple 1s infinite;
     }
 
     @keyframes pulse-purple {
