@@ -49,6 +49,7 @@
         <div id="pets-response">{currentExcuse}</div>
         <Pulse infinite={false} bind:this={pulse} />
     </div>
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div id="pets-button" on:click={generateExcuse}>Ei Pets, tule ikka!</div>
 </body>
 
@@ -91,12 +92,9 @@
         margin: 0 auto;
         cursor: pointer;
         user-select: none;
-        display: inline-block;
 
-        font-size: 2rem;
         border-radius: 1rem;
         padding: 1rem;
         border: 0.1rem solid aliceblue;
-        transition: all 0.5s;
     }
 </style>
