@@ -10,14 +10,15 @@
 	import Test from "./pages/Test.svelte";
     import Router from 'svelte-spa-router';
 	import Pets from "./pages/Pets.svelte";
+    import Kelly from "./pages/Kelly.svelte";
 
     // Define routes
     const routes = {
         '/': Test,
-		'/another' : Pets
+		'/another' : Pets,
+        '/kelly' : Kelly
 		};
 </script>
 <Router {routes} />
 
- 
 
