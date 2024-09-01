@@ -7,5 +7,5 @@
     description="something about youtube as well"
 
     whatILearned="very very much"
-    linkToCode="i should put this to github i think"
+    linkToCode="https://github.com/kpekk/contentCreator"
 />

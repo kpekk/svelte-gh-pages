@@ -9,18 +9,15 @@
     import Router from 'svelte-spa-router';
 	import Pets from "./pages/Pets.svelte";
     import Kelly from "./pages/Kelly.svelte";
-    import Yt from './pages/projects/YT.svelte';
+    import AiContentCreator from './pages/projects/AiContentCreator.svelte';
+    import Links from './pages/Links.svelte';
 
     // Define routes
     const routes = {
 		'/pets' : Pets,
         '/kelly' : Kelly,
-        '/projects/YT': Yt
+        '/projects/contentCreator': AiContentCreator,
+        '/links' : Links
 		};
 </script>
 <Router {routes} />
-
-<!-- 
-<a href="#/kelly">Kelly</a>
-<a href="#/pets">Pets</a>
--->

@@ -77,7 +77,9 @@
         link to code
 
         {#if linkToCodeOpen}
-            <div class="section-content">{linkToCode}</div>
+            <div class="section-content">
+                <a href="{linkToCode}">{linkToCode}</a>
+            </div>
         {/if}
     </div>
 </div>
@@ -96,7 +98,7 @@
 
     .section {
         padding: 1rem;
-        background-color: rgba(0, 255, 255, 0.048);
+        background-color: rgba(4, 91, 71, 0.283);
     }
 
     .section-content {
