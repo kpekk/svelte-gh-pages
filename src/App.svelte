@@ -11,13 +11,15 @@
     import Kelly from "./pages/Kelly.svelte";
     import AiContentCreator from './pages/projects/AiContentCreator.svelte';
     import Links from './pages/Links.svelte';
+    import YouTubeVideoUploader from './pages/projects/YouTubeVideoUploader.svelte';
 
     // Define routes
     const routes = {
 		'/pets' : Pets,
         '/kelly' : Kelly,
         '/projects/contentCreator': AiContentCreator,
-        '/links' : Links
+        '/projects/videoUploader': YouTubeVideoUploader,
+        '/' : Links
 		};
 </script>
 <Router {routes} />

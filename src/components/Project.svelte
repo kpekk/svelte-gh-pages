@@ -1,6 +1,7 @@
 <script>
     export let title = "Project title";
     export let description = "description open";
+    export let codeSamples = [];
     export let whatILearned = "what i learned open";
     export let linkToCode = "link to code, github etc";
 
@@ -39,22 +40,24 @@
         short description
 
         {#if descriptionOpen}
-            <div class="section-content">{description}</div>
+            <div class="section-content">{@html description}</div>
         {/if}
     </div>
 
-    <div
-        class="section code-samples"
-        on:click={toggleCodeSamples}
-        on:keypress={toggleCodeSamples}
-        tabindex="0"
-    >
-        code samples
+    {#if codeSamples.length > 0}
+        <div
+            class="section code-samples"
+            on:click={toggleCodeSamples}
+            on:keypress={toggleCodeSamples}
+            tabindex="0"
+        >
+            code samples
 
-        {#if codeSamplesOpen}
-            <div class="section-content">code samples</div>
-        {/if}
-    </div>
+            {#if codeSamplesOpen}
+                <div class="section-content">code samples</div>
+            {/if}
+        </div>
+    {/if}
 
     <div
         class="section what-i-learned"
@@ -64,7 +67,7 @@
     >
         what i learned
         {#if whatILearnedOpen}
-            <div class="section-content">{whatILearned}</div>
+            <div class="section-content">{@html whatILearned}</div>
         {/if}
     </div>
 
@@ -78,7 +81,7 @@
 
         {#if linkToCodeOpen}
             <div class="section-content">
-                <a href="{linkToCode}">{linkToCode}</a>
+                <a href={linkToCode}>{linkToCode}</a>
             </div>
         {/if}
     </div>
