@@ -2617,8 +2617,8 @@ var app = (function () {
     	project = new Project({
     			props: {
     				title: "AI content creator",
-    				description: "something about youtube as well",
-    				whatILearned: "very very much",
+    				description: "\r\n    More and more content on social media is AI-generated.<br><br>\r\n    \r\n    The main idea for this project was to try to generate a few dozen non-refined videos, \r\n    to see how easy it exactly is.<br><br>\r\n\r\n    I also wanted to learn more about AI and it's current capabilities in the hands of someone like me.<br><br><br>\r\n    \r\n    Bottom line - generating content using AI is too easy to be taken lightly.",
+    				whatILearned: "\r\n    <ul>\r\n        <li>Creating prompts for AI on a basic level</li><br>\r\n        <li>Wokring with OpenAI's API</li><br>\r\n        <li>Protective tools like <a href='https://nightshade.cs.uchicago.edu/whatis.html'>Nightshade</a> can be used by content creators \r\n            to avoid generative AI models being trained on their content\r\n        </li><br>\r\n        <li>and some python</li>\r\n    </ul>",
     				linkToCode: "https://github.com/kpekk/contentCreator"
     			},
     			$$inline: true
