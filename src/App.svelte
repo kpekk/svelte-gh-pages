@@ -12,6 +12,7 @@
     import AiContentCreator from './pages/projects/AiContentCreator.svelte';
     import Links from './pages/Links.svelte';
     import YouTubeVideoUploader from './pages/projects/YouTubeVideoUploader.svelte';
+    import RandomWorkoutGenerator from './pages/projects/RandomWorkoutGenerator.svelte';
 
     // Define routes
     const routes = {
@@ -19,6 +20,7 @@
         '/kelly' : Kelly,
         '/projects/contentCreator': AiContentCreator,
         '/projects/videoUploader': YouTubeVideoUploader,
+        '/projects/rwg': RandomWorkoutGenerator,
         '/' : Links
 		};
 </script>

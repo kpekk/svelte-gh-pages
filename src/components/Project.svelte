@@ -29,7 +29,7 @@
 
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div class="project-container">
-    <h2>{title}</h2>
+    <h2>{@html title}</h2>
 
     <div
         class="section"
