@@ -2087,15 +2087,15 @@ var app = (function () {
 
     const file$2 = "src\\components\\Project.svelte";
 
-    // (42:8) {#if descriptionOpen}
-    function create_if_block_4(ctx) {
+    // (36:8) {#if descriptionOpen}
+    function create_if_block_2(ctx) {
     	let div;
 
     	const block = {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "section-content svelte-gmp772");
-    			add_location(div, file$2, 42, 12, 1107);
+    			add_location(div, file$2, 36, 12, 945);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -2110,108 +2110,16 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block_4.name,
-    		type: "if",
-    		source: "(42:8) {#if descriptionOpen}",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    // (47:4) {#if codeSamples.length > 0}
-    function create_if_block_2(ctx) {
-    	let div;
-    	let t;
-    	let mounted;
-    	let dispose;
-    	let if_block = /*codeSamplesOpen*/ ctx[6] && create_if_block_3(ctx);
-
-    	const block = {
-    		c: function create() {
-    			div = element("div");
-    			t = text("code samples\r\n\r\n            ");
-    			if (if_block) if_block.c();
-    			attr_dev(div, "class", "section code-samples svelte-gmp772");
-    			attr_dev(div, "tabindex", "0");
-    			add_location(div, file$2, 47, 8, 1234);
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
-    			append_dev(div, t);
-    			if (if_block) if_block.m(div, null);
-
-    			if (!mounted) {
-    				dispose = [
-    					listen_dev(div, "click", /*toggleCodeSamples*/ ctx[10], false, false, false, false),
-    					listen_dev(div, "keypress", /*toggleCodeSamples*/ ctx[10], false, false, false, false)
-    				];
-
-    				mounted = true;
-    			}
-    		},
-    		p: function update(ctx, dirty) {
-    			if (/*codeSamplesOpen*/ ctx[6]) {
-    				if (if_block) ; else {
-    					if_block = create_if_block_3(ctx);
-    					if_block.c();
-    					if_block.m(div, null);
-    				}
-    			} else if (if_block) {
-    				if_block.d(1);
-    				if_block = null;
-    			}
-    		},
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div);
-    			if (if_block) if_block.d();
-    			mounted = false;
-    			run_all(dispose);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(47:4) {#if codeSamples.length > 0}",
+    		source: "(36:8) {#if descriptionOpen}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (56:12) {#if codeSamplesOpen}
-    function create_if_block_3(ctx) {
-    	let div;
-
-    	const block = {
-    		c: function create() {
-    			div = element("div");
-    			div.textContent = "code samples";
-    			attr_dev(div, "class", "section-content svelte-gmp772");
-    			add_location(div, file$2, 56, 16, 1485);
-    		},
-    		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
-    		},
-    		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div);
-    		}
-    	};
-
-    	dispatch_dev("SvelteRegisterBlock", {
-    		block,
-    		id: create_if_block_3.name,
-    		type: "if",
-    		source: "(56:12) {#if codeSamplesOpen}",
-    		ctx
-    	});
-
-    	return block;
-    }
-
-    // (69:8) {#if whatILearnedOpen}
+    // (48:8) {#if whatILearnedOpen}
     function create_if_block_1(ctx) {
     	let div;
 
@@ -2219,14 +2127,14 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			attr_dev(div, "class", "section-content svelte-gmp772");
-    			add_location(div, file$2, 69, 12, 1810);
+    			add_location(div, file$2, 48, 12, 1258);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
-    			div.innerHTML = /*whatILearned*/ ctx[3];
+    			div.innerHTML = /*whatILearned*/ ctx[2];
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*whatILearned*/ 8) div.innerHTML = /*whatILearned*/ ctx[3];		},
+    			if (dirty & /*whatILearned*/ 4) div.innerHTML = /*whatILearned*/ ctx[2];		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
     		}
@@ -2236,14 +2144,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(69:8) {#if whatILearnedOpen}",
+    		source: "(48:8) {#if whatILearnedOpen}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (82:8) {#if linkToCodeOpen}
+    // (61:8) {#if linkToCodeOpen}
     function create_if_block(ctx) {
     	let div;
     	let a;
@@ -2253,11 +2161,11 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			a = element("a");
-    			t = text(/*linkToCode*/ ctx[4]);
-    			attr_dev(a, "href", /*linkToCode*/ ctx[4]);
-    			add_location(a, file$2, 83, 16, 2163);
+    			t = text(/*linkToCode*/ ctx[3]);
+    			attr_dev(a, "href", /*linkToCode*/ ctx[3]);
+    			add_location(a, file$2, 62, 16, 1611);
     			attr_dev(div, "class", "section-content svelte-gmp772");
-    			add_location(div, file$2, 82, 12, 2116);
+    			add_location(div, file$2, 61, 12, 1564);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -2265,10 +2173,10 @@ var app = (function () {
     			append_dev(a, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*linkToCode*/ 16) set_data_dev(t, /*linkToCode*/ ctx[4]);
+    			if (dirty & /*linkToCode*/ 8) set_data_dev(t, /*linkToCode*/ ctx[3]);
 
-    			if (dirty & /*linkToCode*/ 16) {
-    				attr_dev(a, "href", /*linkToCode*/ ctx[4]);
+    			if (dirty & /*linkToCode*/ 8) {
+    				attr_dev(a, "href", /*linkToCode*/ ctx[3]);
     			}
     		},
     		d: function destroy(detaching) {
@@ -2280,7 +2188,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(82:8) {#if linkToCodeOpen}",
+    		source: "(61:8) {#if linkToCodeOpen}",
     		ctx
     	});
 
@@ -2294,18 +2202,16 @@ var app = (function () {
     	let div0;
     	let t1;
     	let t2;
-    	let t3;
     	let div1;
+    	let t3;
     	let t4;
-    	let t5;
     	let div2;
-    	let t6;
+    	let t5;
     	let mounted;
     	let dispose;
-    	let if_block0 = /*descriptionOpen*/ ctx[5] && create_if_block_4(ctx);
-    	let if_block1 = /*codeSamples*/ ctx[2].length > 0 && create_if_block_2(ctx);
-    	let if_block2 = /*whatILearnedOpen*/ ctx[7] && create_if_block_1(ctx);
-    	let if_block3 = /*linkToCodeOpen*/ ctx[8] && create_if_block(ctx);
+    	let if_block0 = /*descriptionOpen*/ ctx[4] && create_if_block_2(ctx);
+    	let if_block1 = /*whatILearnedOpen*/ ctx[5] && create_if_block_1(ctx);
+    	let if_block2 = /*linkToCodeOpen*/ ctx[6] && create_if_block(ctx);
 
     	const block = {
     		c: function create() {
@@ -2316,28 +2222,26 @@ var app = (function () {
     			t1 = text("short description\r\n\r\n        ");
     			if (if_block0) if_block0.c();
     			t2 = space();
-    			if (if_block1) if_block1.c();
-    			t3 = space();
     			div1 = element("div");
-    			t4 = text("what i learned\r\n        ");
-    			if (if_block2) if_block2.c();
-    			t5 = space();
+    			t3 = text("what i learned\r\n        ");
+    			if (if_block1) if_block1.c();
+    			t4 = space();
     			div2 = element("div");
-    			t6 = text("link to code\r\n\r\n        ");
-    			if (if_block3) if_block3.c();
+    			t5 = text("link to code\r\n\r\n        ");
+    			if (if_block2) if_block2.c();
     			attr_dev(h2, "class", "svelte-gmp772");
-    			add_location(h2, file$2, 31, 4, 866);
+    			add_location(h2, file$2, 25, 4, 704);
     			attr_dev(div0, "class", "section svelte-gmp772");
     			attr_dev(div0, "tabindex", "0");
-    			add_location(div0, file$2, 33, 4, 896);
+    			add_location(div0, file$2, 27, 4, 734);
     			attr_dev(div1, "class", "section what-i-learned svelte-gmp772");
     			attr_dev(div1, "tabindex", "0");
-    			add_location(div1, file$2, 61, 4, 1586);
+    			add_location(div1, file$2, 40, 4, 1034);
     			attr_dev(div2, "class", "section link-to-code svelte-gmp772");
     			attr_dev(div2, "tabindex", "0");
-    			add_location(div2, file$2, 73, 4, 1900);
+    			add_location(div2, file$2, 52, 4, 1348);
     			attr_dev(div3, "class", "project-container svelte-gmp772");
-    			add_location(div3, file$2, 30, 0, 829);
+    			add_location(div3, file$2, 24, 0, 667);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2351,24 +2255,22 @@ var app = (function () {
     			append_dev(div0, t1);
     			if (if_block0) if_block0.m(div0, null);
     			append_dev(div3, t2);
-    			if (if_block1) if_block1.m(div3, null);
-    			append_dev(div3, t3);
     			append_dev(div3, div1);
-    			append_dev(div1, t4);
-    			if (if_block2) if_block2.m(div1, null);
-    			append_dev(div3, t5);
+    			append_dev(div1, t3);
+    			if (if_block1) if_block1.m(div1, null);
+    			append_dev(div3, t4);
     			append_dev(div3, div2);
-    			append_dev(div2, t6);
-    			if (if_block3) if_block3.m(div2, null);
+    			append_dev(div2, t5);
+    			if (if_block2) if_block2.m(div2, null);
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(div0, "click", /*toggleDescription*/ ctx[9], false, false, false, false),
-    					listen_dev(div0, "keypress", /*toggleDescription*/ ctx[9], false, false, false, false),
-    					listen_dev(div1, "click", /*toggleWhatILearned*/ ctx[11], false, false, false, false),
-    					listen_dev(div1, "keypress", /*toggleWhatILearned*/ ctx[11], false, false, false, false),
-    					listen_dev(div2, "click", /*toggleLinkToCode*/ ctx[12], false, false, false, false),
-    					listen_dev(div2, "keypress", /*toggleLinkToCode*/ ctx[12], false, false, false, false)
+    					listen_dev(div0, "click", /*toggleDescription*/ ctx[7], false, false, false, false),
+    					listen_dev(div0, "keypress", /*toggleDescription*/ ctx[7], false, false, false, false),
+    					listen_dev(div1, "click", /*toggleWhatILearned*/ ctx[8], false, false, false, false),
+    					listen_dev(div1, "keypress", /*toggleWhatILearned*/ ctx[8], false, false, false, false),
+    					listen_dev(div2, "click", /*toggleLinkToCode*/ ctx[9], false, false, false, false),
+    					listen_dev(div2, "keypress", /*toggleLinkToCode*/ ctx[9], false, false, false, false)
     				];
 
     				mounted = true;
@@ -2376,11 +2278,11 @@ var app = (function () {
     		},
     		p: function update(ctx, [dirty]) {
     			if (dirty & /*title*/ 1) h2.innerHTML = /*title*/ ctx[0];
-    			if (/*descriptionOpen*/ ctx[5]) {
+    			if (/*descriptionOpen*/ ctx[4]) {
     				if (if_block0) {
     					if_block0.p(ctx, dirty);
     				} else {
-    					if_block0 = create_if_block_4(ctx);
+    					if_block0 = create_if_block_2(ctx);
     					if_block0.c();
     					if_block0.m(div0, null);
     				}
@@ -2389,43 +2291,30 @@ var app = (function () {
     				if_block0 = null;
     			}
 
-    			if (/*codeSamples*/ ctx[2].length > 0) {
+    			if (/*whatILearnedOpen*/ ctx[5]) {
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
     				} else {
-    					if_block1 = create_if_block_2(ctx);
+    					if_block1 = create_if_block_1(ctx);
     					if_block1.c();
-    					if_block1.m(div3, t3);
+    					if_block1.m(div1, null);
     				}
     			} else if (if_block1) {
     				if_block1.d(1);
     				if_block1 = null;
     			}
 
-    			if (/*whatILearnedOpen*/ ctx[7]) {
+    			if (/*linkToCodeOpen*/ ctx[6]) {
     				if (if_block2) {
     					if_block2.p(ctx, dirty);
     				} else {
-    					if_block2 = create_if_block_1(ctx);
+    					if_block2 = create_if_block(ctx);
     					if_block2.c();
-    					if_block2.m(div1, null);
+    					if_block2.m(div2, null);
     				}
     			} else if (if_block2) {
     				if_block2.d(1);
     				if_block2 = null;
-    			}
-
-    			if (/*linkToCodeOpen*/ ctx[8]) {
-    				if (if_block3) {
-    					if_block3.p(ctx, dirty);
-    				} else {
-    					if_block3 = create_if_block(ctx);
-    					if_block3.c();
-    					if_block3.m(div2, null);
-    				}
-    			} else if (if_block3) {
-    				if_block3.d(1);
-    				if_block3 = null;
     			}
     		},
     		i: noop,
@@ -2435,7 +2324,6 @@ var app = (function () {
     			if (if_block0) if_block0.d();
     			if (if_block1) if_block1.d();
     			if (if_block2) if_block2.d();
-    			if (if_block3) if_block3.d();
     			mounted = false;
     			run_all(dispose);
     		}
@@ -2457,31 +2345,25 @@ var app = (function () {
     	validate_slots('Project', slots, []);
     	let { title = "Project title" } = $$props;
     	let { description = "description open" } = $$props;
-    	let { codeSamples = [] } = $$props;
     	let { whatILearned = "what i learned open" } = $$props;
     	let { linkToCode = "link to code, github etc" } = $$props;
     	let descriptionOpen = false;
-    	let codeSamplesOpen = false;
     	let whatILearnedOpen = false;
     	let linkToCodeOpen = false;
 
     	const toggleDescription = () => {
-    		$$invalidate(5, descriptionOpen = !descriptionOpen);
-    	};
-
-    	const toggleCodeSamples = () => {
-    		$$invalidate(6, codeSamplesOpen = !codeSamplesOpen);
+    		$$invalidate(4, descriptionOpen = !descriptionOpen);
     	};
 
     	const toggleWhatILearned = () => {
-    		$$invalidate(7, whatILearnedOpen = !whatILearnedOpen);
+    		$$invalidate(5, whatILearnedOpen = !whatILearnedOpen);
     	};
 
     	const toggleLinkToCode = () => {
-    		$$invalidate(8, linkToCodeOpen = !linkToCodeOpen);
+    		$$invalidate(6, linkToCodeOpen = !linkToCodeOpen);
     	};
 
-    	const writable_props = ['title', 'description', 'codeSamples', 'whatILearned', 'linkToCode'];
+    	const writable_props = ['title', 'description', 'whatILearned', 'linkToCode'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Project> was created with unknown prop '${key}'`);
@@ -2490,23 +2372,19 @@ var app = (function () {
     	$$self.$$set = $$props => {
     		if ('title' in $$props) $$invalidate(0, title = $$props.title);
     		if ('description' in $$props) $$invalidate(1, description = $$props.description);
-    		if ('codeSamples' in $$props) $$invalidate(2, codeSamples = $$props.codeSamples);
-    		if ('whatILearned' in $$props) $$invalidate(3, whatILearned = $$props.whatILearned);
-    		if ('linkToCode' in $$props) $$invalidate(4, linkToCode = $$props.linkToCode);
+    		if ('whatILearned' in $$props) $$invalidate(2, whatILearned = $$props.whatILearned);
+    		if ('linkToCode' in $$props) $$invalidate(3, linkToCode = $$props.linkToCode);
     	};
 
     	$$self.$capture_state = () => ({
     		title,
     		description,
-    		codeSamples,
     		whatILearned,
     		linkToCode,
     		descriptionOpen,
-    		codeSamplesOpen,
     		whatILearnedOpen,
     		linkToCodeOpen,
     		toggleDescription,
-    		toggleCodeSamples,
     		toggleWhatILearned,
     		toggleLinkToCode
     	});
@@ -2514,13 +2392,11 @@ var app = (function () {
     	$$self.$inject_state = $$props => {
     		if ('title' in $$props) $$invalidate(0, title = $$props.title);
     		if ('description' in $$props) $$invalidate(1, description = $$props.description);
-    		if ('codeSamples' in $$props) $$invalidate(2, codeSamples = $$props.codeSamples);
-    		if ('whatILearned' in $$props) $$invalidate(3, whatILearned = $$props.whatILearned);
-    		if ('linkToCode' in $$props) $$invalidate(4, linkToCode = $$props.linkToCode);
-    		if ('descriptionOpen' in $$props) $$invalidate(5, descriptionOpen = $$props.descriptionOpen);
-    		if ('codeSamplesOpen' in $$props) $$invalidate(6, codeSamplesOpen = $$props.codeSamplesOpen);
-    		if ('whatILearnedOpen' in $$props) $$invalidate(7, whatILearnedOpen = $$props.whatILearnedOpen);
-    		if ('linkToCodeOpen' in $$props) $$invalidate(8, linkToCodeOpen = $$props.linkToCodeOpen);
+    		if ('whatILearned' in $$props) $$invalidate(2, whatILearned = $$props.whatILearned);
+    		if ('linkToCode' in $$props) $$invalidate(3, linkToCode = $$props.linkToCode);
+    		if ('descriptionOpen' in $$props) $$invalidate(4, descriptionOpen = $$props.descriptionOpen);
+    		if ('whatILearnedOpen' in $$props) $$invalidate(5, whatILearnedOpen = $$props.whatILearnedOpen);
+    		if ('linkToCodeOpen' in $$props) $$invalidate(6, linkToCodeOpen = $$props.linkToCodeOpen);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -2530,15 +2406,12 @@ var app = (function () {
     	return [
     		title,
     		description,
-    		codeSamples,
     		whatILearned,
     		linkToCode,
     		descriptionOpen,
-    		codeSamplesOpen,
     		whatILearnedOpen,
     		linkToCodeOpen,
     		toggleDescription,
-    		toggleCodeSamples,
     		toggleWhatILearned,
     		toggleLinkToCode
     	];
@@ -2551,9 +2424,8 @@ var app = (function () {
     		init(this, options, instance$5, create_fragment$5, safe_not_equal, {
     			title: 0,
     			description: 1,
-    			codeSamples: 2,
-    			whatILearned: 3,
-    			linkToCode: 4
+    			whatILearned: 2,
+    			linkToCode: 3
     		});
 
     		dispatch_dev("SvelteRegisterComponent", {
@@ -2577,14 +2449,6 @@ var app = (function () {
     	}
 
     	set description(value) {
-    		throw new Error("<Project>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	get codeSamples() {
-    		throw new Error("<Project>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set codeSamples(value) {
     		throw new Error("<Project>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
@@ -2615,7 +2479,7 @@ var app = (function () {
     			props: {
     				title: "AI content creator",
     				description: "\r\n    More and more content on social media is AI-generated.<br><br>\r\n    \r\n    The main idea for this project was to try to generate a few dozen non-refined videos, \r\n    to see how easy it exactly is.<br><br>\r\n\r\n    I also wanted to learn more about AI and it's current capabilities in the hands of someone like me.<br><br><br>\r\n    \r\n    Bottom line - generating content using AI is too easy to be taken lightly.",
-    				whatILearned: "\r\n    <ul>\r\n        <li>Creating prompts for AI on a basic level</li><br>\r\n        <li>Wokring with OpenAI's API</li><br>\r\n        <li>Protective tools like <a href='https://nightshade.cs.uchicago.edu/whatis.html'>Nightshade</a> can be used by content creators \r\n            to avoid generative AI models being trained on their content\r\n        </li><br>\r\n        <li>and some python</li>\r\n    </ul>",
+    				whatILearned: "\r\n    <ul>\r\n        <li>Creating prompts for AI on a basic level</li><br>\r\n        <li>Wokring with OpenAI's API</li><br>\r\n        <li>Protective tools like <a href='https://nightshade.cs.uchicago.edu/whatis.html'>Nightshade</a> can be used by content creators \r\n            to avoid generative AI models being trained on their content\r\n        </li><br>\r\n        <li>and some Python</li>\r\n    </ul>",
     				linkToCode: "https://github.com/kpekk/contentCreator"
     			},
     			$$inline: true
@@ -2883,8 +2747,8 @@ var app = (function () {
     	project = new Project({
     			props: {
     				title: "Random workout generator <i>v1</i>",
-    				description: "description",
-    				whatILearned: "what i learned",
+    				description: "\r\n\r\n    <i>Choose the muscle groups you want to focus on in your next workout\r\n    and, in the touch of a button, see the workout plan from your email!</i><br><br>\r\n\r\n    I created this project during my bachelor degree studies, when I had more free time\r\n    and a gym within walking distance. <br><br>\r\n    \r\n    The goal was to automate workout plan creation, as at that point, it was the most tedious part \r\n    of working out for me. Eliminating that would mean that I would be much more likely to go to the\r\n    gym - and yup, it worked.<br><br>\r\n\r\n    Setting up the app is quite unconvenient - that's why I'm slowly but surely working on the second version of this project \r\n    (using a mobile-first approach).\r\n    ",
+    				whatILearned: "\r\n    <ul>\r\n        <li>technical knowledge alone is not enough for structured development process, \r\n            the end goal (and sub goals) should be clear (they do not have to be final though)\r\n            before starting the development    \r\n        </li>\r\n        <li>some Python (inc. sending emails with Python)</li>\r\n        <li>creating GUIs with PyQT</li>\r\n        <li>passion projects are <b>really</b> fun</li>\r\n    </ul>",
     				linkToCode: "https://github.com/kpekk/randomWorkoutCreator"
     			},
     			$$inline: true

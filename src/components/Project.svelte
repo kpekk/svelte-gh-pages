@@ -1,21 +1,15 @@
 <script>
     export let title = "Project title";
     export let description = "description open";
-    export let codeSamples = [];
     export let whatILearned = "what i learned open";
     export let linkToCode = "link to code, github etc";
 
     let descriptionOpen = false;
-    let codeSamplesOpen = false;
     let whatILearnedOpen = false;
     let linkToCodeOpen = false;
 
     const toggleDescription = () => {
         descriptionOpen = !descriptionOpen;
-    };
-
-    const toggleCodeSamples = () => {
-        codeSamplesOpen = !codeSamplesOpen;
     };
 
     const toggleWhatILearned = () => {
@@ -43,21 +37,6 @@
             <div class="section-content">{@html description}</div>
         {/if}
     </div>
-
-    {#if codeSamples.length > 0}
-        <div
-            class="section code-samples"
-            on:click={toggleCodeSamples}
-            on:keypress={toggleCodeSamples}
-            tabindex="0"
-        >
-            code samples
-
-            {#if codeSamplesOpen}
-                <div class="section-content">code samples</div>
-            {/if}
-        </div>
-    {/if}
 
     <div
         class="section what-i-learned"

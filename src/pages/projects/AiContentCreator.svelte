@@ -20,7 +20,7 @@
         <li>Protective tools like <a href='https://nightshade.cs.uchicago.edu/whatis.html'>Nightshade</a> can be used by content creators 
             to avoid generative AI models being trained on their content
         </li><br>
-        <li>and some python</li>
+        <li>and some Python</li>
     </ul>"
     linkToCode="https://github.com/kpekk/contentCreator"
 />
